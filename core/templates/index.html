@@ -1,0 +1,89 @@
+{% load static %}
+
+{% load widget_tweaks %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cadastro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="{% static 'assets/bootstrap.min.css' %}" media="screen" />
+    <link rel="stylesheet" href="{% static 'assets/custom.min.css' %}" media="screen" />
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+<!--        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
+        <div class="navbar navbar-expand " id="navbar-main">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="">Minha Conta</a></li>
+                <li><a href="">Logout</a></li>
+                <li><a href="{% url 'entrar' %}">Entrar</a></li>
+                <li><a href="{% url 'RegisterView' %}">Registro</a></li>
+            </ul>
+<!--        </nav>-->
+        </div>
+    </div>
+</div>
+<br>
+<div class="container ml-10">
+    {% block messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endblock %}
+    <div class="container col-md-4 m-10 ">
+        <form method="post" action="{% url 'CadastroFisico' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <h3>Cliente Físico</h3>
+                <label>Nome</label>
+                {% render_field cliente_fisico.nome class='form-control' %}
+            </div>
+            <div class="form-group">
+                <label>Sexo</label>
+                {% render_field cliente_fisico.sexo class='form-control' %}
+            </div>
+            <div class="form-group">
+                <label>cpf</label>
+                {% render_field cliente_fisico.cpf class='form-control' %}
+            </div>
+            <button type="submit" class="btn btn-primary">Validar</button>
+        </form>
+        {{nome}}
+        {{cpf}}
+
+    </div>
+
+    <div class="container col-md-4 mt-2">
+        <form method="post" action="{% url 'CadastroJuridico' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <h3>Cliente Jurídico</h3>
+                <label>Nome</label>
+                {% render_field cliente_juridico.nome class='form-control' %}
+            </div>
+            <div class="form-group">
+                <label>CNPJ</label>
+                {% render_field cliente_juridico.cnpj class='form-control' %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Validar</button>
+        </form>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
